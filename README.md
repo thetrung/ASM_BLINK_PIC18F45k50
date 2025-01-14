@@ -15,7 +15,7 @@ This was done on `A morning of Jan 11th, 2025` with :
 ### Key Issues
 Key problem during debugging was how the linker didn't link the code properly with previous `ORG` directive on MPASM.
 - **PSECT** : this is now required for linker to link every parts correctly. And `space=[0~3]` argument let us access `program memory, data memory, reserved, eeprom`. Which is quite critical usage on memory.
-- **BANKSEL** : to select the bank of address. Ex: `BANKSEL(TRISA)` before `CLRF TRISA`.
+- **BANKSEL** : directive to select a memory bank in SRAM, because PIC can only access no more than 256 bytes at once, so it divide memory into banks. Ex: `BANKSEL(TRISA)` will translate into `MOVLB 0xF92` to select TRISA bank.
 - **Case Sensitive** : from PIC-AS, it start to distinct this matter, so `MAIN` and `main` are different now.
 - **#include <xc.inc>** : for stuffs like TRISA, PORTA.
 
